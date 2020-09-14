@@ -1,5 +1,6 @@
 #include "PID.h"
 #include "math.h"
+#include <cmath> 
 
 /**
  * TODO: Complete the PID class. You may add any additional desired functions.
@@ -39,7 +40,7 @@ double PID::TotalError() {
    */
 
   double total_err = - p_error_ - d_error_ - i_error_;
-  total_err = std::fmax( std::fmin(total_err, max_), min_);
+  total_err = fmax( fmin(total_err, max_), min_);
   return total_err;
 }
 
