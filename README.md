@@ -1,7 +1,24 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+**Implementation Details:** The PID class is filled with necessary methods and attributes. The *::Init* method initialize the filter with arguments Kp, Ki, and Kd values.
 
+There are the minimum and maximum limitations for the output of the PID controller. These values might be set using *::SetMin*, *::SetMax* methods. 
+
+The method *::SetRef* is used to set the reference parameter for the PID controller. For steering control, the reference value is zero since the input is the CTE (we are trying to make the CTE zero).
+There is also an extra PID controller to keep the speed maximum (which is the speed limit:100mph). The reference value for the speed PID controller, therefore, is 100mph. The controller's min value is also set to zero since there is no need to give negative throttle to the car (its speed decreases due to friction). The reference value for speed PID is chosen as *speedlimit-20xCTE*. If there is large CTE error the car should no speed up. Therefore I decrease the reference value for the controller.
+
+**Parameters of PID Controller:**
+The PID controller calculates the error between reference and input values. This error is multiplied by a coefficient and feed to output in order to converge the input to reference value (in our case, converge the CTE to zero). This coefficient is known as **P**roportional parameter. 
+However, mostly the **P** is not adequate for minimizing steady-state error. It successfully converges the value to reference value, but the error never becomes precisely zero due to the systems' nature. Thus it continues to change the input, and there become oscillations. We use the scaled derivative of the error for compensation to prevent oscillations, also known as the **D** parameter. The **I** parameter is necessary, especially if there exists a bias between the control input and the sensor measurement. It integrates the error in time and compensates the control input if there is a continuous difference between reference and input values.
+
+**Parameter Tuning**
+The parameters of the controller are tuned by hand without using automatic tuning methods such as twiddle. The parameters are as follows:
+- P = 0.12
+- I = 0.0001
+- D = 2.8
+Since no bias exists in the system, there is no need for a large **I** parameter. 
+The car could go up to 50mph in the simulations. 
 
 ## Dependencies
 
