@@ -13,10 +13,15 @@ The PID controller calculates the error between reference and input values. This
 However, mostly the **P** is not adequate for minimizing steady-state error. It successfully converges the value to reference value, but the error never becomes precisely zero due to the systems' nature. Thus it continues to change the input, and there become oscillations. We use the scaled derivative of the error for compensation to prevent oscillations, also known as the **D** parameter. The **I** parameter is necessary, especially if there exists a bias between the control input and the sensor measurement. It integrates the error in time and compensates the control input if there is a continuous difference between reference and input values.
 
 **Parameter Tuning**
-The parameters of the controller are tuned by hand without using automatic tuning methods such as twiddle. The parameters are as follows:
+The parameters of the controller are tuned by hand without using automatic tuning methods such as twiddle. 
+The parameters for the steering PID are as follows:
 - P = 0.12
 - I = 0.0001
 - D = 2.8
+The parameters for the speed PID are as follows:
+- P = 0.01
+- I = 0
+- D = 0.1
 Since no bias exists in the system, there is no need for a large **I** parameter. 
 The car could go up to 50mph in the simulations. 
 
