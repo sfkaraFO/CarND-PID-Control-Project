@@ -2,6 +2,7 @@
 #include "math.h"
 #include <cmath> 
 
+using namespace std;
 /**
  * TODO: Complete the PID class. You may add any additional desired functions.
  */
